@@ -1,8 +1,9 @@
 <?php
+
 /**
  *
  */
- 
+
 namespace Omnipay\NABTransact\Message;
 
 /**
@@ -22,19 +23,21 @@ final class PeriodicUpdateCustomerRequest extends PeriodicAbstractRequest
 
         return $data;
     }
-	
-	public function validate(){
-		parent::validate('card');
-		parent::validate('customerReference');
-	}
-	
-	public function getActionType()
-	{
-		return 'editcrn';
-	}
-	
-	protected function buildRequestBody(array $data){
-		return '<?xml version="1.0" encoding="UTF-8"?>
+
+    public function validate()
+    {
+        parent::validate('card');
+        parent::validate('customerReference');
+    }
+
+    public function getActionType()
+    {
+        return 'editcrn';
+    }
+
+    protected function buildRequestBody(array $data)
+    {
+        return '<?xml version="1.0" encoding="UTF-8"?>
 <NABTransactMessage>
     <MessageInfo>
         <messageID>'.$data['MessageID'].'</messageID>
@@ -62,5 +65,5 @@ final class PeriodicUpdateCustomerRequest extends PeriodicAbstractRequest
         </PeriodicList>
     </Periodic>
 </NABTransactMessage>';
-	}
+    }
 }

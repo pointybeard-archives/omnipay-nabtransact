@@ -45,32 +45,31 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('messageTimestamp', $value);
     }
-	
+
     protected function getBaseData()
     {
         $data = [
             'MessageID' => self::generateMessageId(),
             'MessageTimestamp' => null,
             'ActionType' => $this->getActionType(),
-			'ApiVersion' => $this->getApiVersion(),
-			'Credentials' => [
-				'MerchantID' => $this->getMerchantId(),
-				'Password' => $this->getPassword(),
-			]
+            'ApiVersion' => $this->getApiVersion(),
+            'Credentials' => [
+                'MerchantID' => $this->getMerchantId(),
+                'Password' => $this->getPassword(),
+            ],
         ];
 
         return $data;
     }
 
-
-    protected static function generateMessageId(){
+    protected static function generateMessageId()
+    {
         $hash = hash('sha256', microtime());
         // Unfortunately NAB wants a unique string that is 30 characters long. Easist
         // way for now is to truncate the hash to 30 characters however this is not ideal
         return substr($hash, 0, 30);
     }
     /**
-     *
      * The format of the Timestamp or Log Time strings returned by NAB Transact XML API is:
      * YYYYDDMMHHnnssKKK000sOOO
      * where:
@@ -82,14 +81,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *    SS = 3-digit zero-padded millisecond of second
      *    KKK = Static 0 characters, as NAB Transact does not store nanoseconds
      *    000 = Time zone offset, where s is “+” or “-“, and OOO = minutes, from GMT.
-     *    sOOO = 4-digit year
+     *    sOOO = 4-digit year.
      *
      * E.g. June 24, 2010 5:12:16.789 PM, Australian EST is:
      *        20102406171216789000+600
      */
-    protected static function generateMessageTimestamp(){
+    protected static function generateMessageTimestamp()
+    {
         list($micro, $sec) = explode(' ', microtime());
         $ss = substr($micro, 2, 3);
+
         return date("YdmHis{$ss}000+600");
     }
 

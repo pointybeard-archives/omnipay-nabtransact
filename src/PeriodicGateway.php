@@ -1,8 +1,8 @@
 <?php
-/**
- * NAB Transact "Customer Management and Payment Scheduling" Gateway
- */
 
+/**
+ * NAB Transact "Customer Management and Payment Scheduling" Gateway.
+ */
 namespace Omnipay\NABTransact;
 
 use Omnipay\Common\AbstractGateway;
@@ -61,6 +61,7 @@ class PeriodicGateway extends AbstractGateway
      * (CRN) in the form of a customerReferenceNumber
      *
      * @param array $parameters
+     *
      * @return \Omnipay\NABTransact\Message\PeriodicPurchaseRequest
      */
     //public function purchase(array $parameters = [])
@@ -69,7 +70,7 @@ class PeriodicGateway extends AbstractGateway
     //}
 
     /**
-     * Store a credit card as a Customer Reference Number (CRN)
+     * Store a credit card as a Customer Reference Number (CRN).
      *
      * You can currently securely store card details with NAB for future
      * charging using a CRN.
@@ -77,6 +78,7 @@ class PeriodicGateway extends AbstractGateway
      * details to complete a payment.
      *
      * @param array $parameters
+     *
      * @return \Omnipay\NABTransact\Message\PeriodicCreateCustomerRequest
      */
     public function createCard(array $parameters = [])
@@ -85,13 +87,14 @@ class PeriodicGateway extends AbstractGateway
     }
 
     /**
-     * Update a credit card stored as a Customer Reference Number (CRN)
+     * Update a credit card stored as a Customer Reference Number (CRN).
      *
      * You can currently securely store card details with NAB for future
      * charging using a CRN.
      * This resource requires the customerReferenceNumber for the card to be updated.
      *
      * @param array $parameters
+     *
      * @return \Omnipay\NABTransact\Message\PeriodicUpdateCustomerRequest
      */
     public function updateCard(array $parameters = [])
@@ -100,13 +103,14 @@ class PeriodicGateway extends AbstractGateway
     }
 
     /**
-     * Delete a credit card stored as a Customer Reference Number (CRN)
+     * Delete a credit card stored as a Customer Reference Number (CRN).
      *
      * You can currently securely store card details with NAB for future
      * charging using a CRN.
      * This resource requires the customerReferenceNumber for the card to be updated.
      *
      * @param array $parameters
+     *
      * @return \Omnipay\NABTransact\Message\PeriodicDeleteCustomerRequest
      */
     public function deleteCard(array $parameters = [])

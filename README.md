@@ -5,6 +5,9 @@
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements NAB Transact support for Omnipay.
 
+**IMPORTANT: This is a very early alpha release and is likely to be buggy. Please do not use this in production environments.**
+
+
 ## Installation
 
 Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
@@ -37,6 +40,7 @@ And run composer to update your dependencies:
         'testMode' => true,
     ]);
 
+    // Add a customer
     $request = $g->createCard(['card' => [
             'number' => '4111111111111111',
             'expiryMonth' => '02',
@@ -44,10 +48,23 @@ And run composer to update your dependencies:
             'cvv' => '123',
         ]
     ]);
-
     $response = $request->send();
-    print($response->getData()->asXML());
-	exit;
+
+    // Update a customer
+    $request = $g->updateCard([
+        'customerReference' => $response->getCustomerReference(),
+        'card' => [
+            'number' => '4444333322221111',
+            'expiryMonth' => '03',
+            'expiryYear' => '16'
+        ]
+    ]);
+    $response = $request->send();
+
+    // Delete a customer
+    $request = $g->deleteCard(['customerReference' => $response->getCustomerReference()]);
+    $response = $request->send();
+
 ```
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)

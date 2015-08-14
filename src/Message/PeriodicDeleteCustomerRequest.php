@@ -1,8 +1,9 @@
 <?php
+
 /**
  *
  */
- 
+
 namespace Omnipay\NABTransact\Message;
 
 /**
@@ -22,18 +23,20 @@ final class PeriodicDeleteCustomerRequest extends PeriodicAbstractRequest
 
         return $data;
     }
-	
-	public function validate(){
-		parent::validate('customerReference');
-	}
-	
-	public function getActionType()
-	{
-		return 'deletecrn';
-	}
-	
-	protected function buildRequestBody(array $data){
-		return '<?xml version="1.0" encoding="UTF-8"?>
+
+    public function validate()
+    {
+        parent::validate('customerReference');
+    }
+
+    public function getActionType()
+    {
+        return 'deletecrn';
+    }
+
+    protected function buildRequestBody(array $data)
+    {
+        return '<?xml version="1.0" encoding="UTF-8"?>
 <NABTransactMessage>
 	<MessageInfo>
 	    <messageID>'.$data['MessageID'].'</messageID>
@@ -56,5 +59,5 @@ final class PeriodicDeleteCustomerRequest extends PeriodicAbstractRequest
 		</PeriodicList>
 	</Periodic>
 </NABTransactMessage>';
-	}
+    }
 }

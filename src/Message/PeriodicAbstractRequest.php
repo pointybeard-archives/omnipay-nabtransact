@@ -52,7 +52,8 @@ abstract class PeriodicAbstractRequest extends AbstractRequest
         return $this->response = new PeriodicResponse($this, $httpResponse->getBody());
     }
 
-    public function getEndpoint(){
+    public function getEndpoint()
+    {
         return self::getEndpointBase();
     }
 }
