@@ -20,12 +20,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "omnipay/common": "~2.3",
-        "guzzlehttp/guzzle": "~6.0",
-        "fzaninotto/faker": "^1.6@dev"
+        "omnipay/common": "~2.3"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0"
+        "omnipay/tests": "~2.0",
+        "fzaninotto/faker": "^1.6@dev"
     },
     "autoload": {
         "psr-4": {

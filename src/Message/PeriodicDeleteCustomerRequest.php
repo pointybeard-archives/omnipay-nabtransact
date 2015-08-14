@@ -3,7 +3,6 @@
 /**
  *
  */
-
 namespace Omnipay\NABTransact\Message;
 
 /**
@@ -38,26 +37,26 @@ final class PeriodicDeleteCustomerRequest extends PeriodicAbstractRequest
     {
         return '<?xml version="1.0" encoding="UTF-8"?>
 <NABTransactMessage>
-	<MessageInfo>
-	    <messageID>'.$data['MessageID'].'</messageID>
-	    <messageTimestamp>'.$data['MessageTimestamp'].'</messageTimestamp>
-	    <timeoutValue>60</timeoutValue>
-	    <apiVersion>'.$data['ApiVersion'].'</apiVersion>
-	</MessageInfo>
-	<MerchantInfo>
-    	<merchantID>'.$data['Credentials']['MerchantID'].'</merchantID>
-    	<password>'.$data['Credentials']['Password'].'</password>
-	</MerchantInfo>
-	<RequestType>Periodic</RequestType>
-	<Periodic>
-		<PeriodicList count="1">
-			<PeriodicItem ID="1">
-				<actionType>'.$data['ActionType'].'</actionType>
-				<periodicType>5</periodicType>
-				<crn>'.$data['CustomerReferenceNumber'].'</crn>
-			</PeriodicItem>
-		</PeriodicList>
-	</Periodic>
+    <MessageInfo>
+        <messageID>'.$data['MessageID'].'</messageID>
+        <messageTimestamp>'.$data['MessageTimestamp'].'</messageTimestamp>
+        <timeoutValue>60</timeoutValue>
+        <apiVersion>'.$data['ApiVersion'].'</apiVersion>
+    </MessageInfo>
+    <MerchantInfo>
+        <merchantID>'.$data['Credentials']['MerchantID'].'</merchantID>
+        <password>'.$data['Credentials']['Password'].'</password>
+    </MerchantInfo>
+    <RequestType>Periodic</RequestType>
+    <Periodic>
+        <PeriodicList count="1">
+            <PeriodicItem ID="1">
+                <actionType>'.$data['ActionType'].'</actionType>
+                <periodicType>5</periodicType>
+                <crn>'.$data['CustomerReferenceNumber'].'</crn>
+            </PeriodicItem>
+        </PeriodicList>
+    </Periodic>
 </NABTransactMessage>';
     }
 }

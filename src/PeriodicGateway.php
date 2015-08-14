@@ -55,19 +55,19 @@ class PeriodicGateway extends AbstractGateway
     }
 
     /**
-     * Create a purchase request.
+     * Trigger a payment.
      *
      * Used for initiating a purchase transaction a customer reference number
      * (CRN) in the form of a customerReferenceNumber
      *
      * @param array $parameters
      *
-     * @return \Omnipay\NABTransact\Message\PeriodicPurchaseRequest
+     * @return \Omnipay\NABTransact\Message\PeriodicTriggerPaymentRequest
      */
-    //public function purchase(array $parameters = [])
-    //{
-    //    return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicPurchaseRequest', $parameters);
-    //}
+    public function purchase(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicTriggerPaymentRequest', $parameters);
+    }
 
     /**
      * Store a credit card as a Customer Reference Number (CRN).
