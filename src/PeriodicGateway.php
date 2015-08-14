@@ -109,8 +109,8 @@ class PeriodicGateway extends AbstractGateway
      * @param array $parameters
      * @return \Omnipay\NABTransact\Message\PeriodicDeleteCustomerRequest
      */
-    //public function deleteCard(array $parameters = [])
-    //{
-    //    return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicDeleteCustomerRequest', $parameters);
-    //}
+    public function deleteCard(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicDeleteCustomerRequest', $parameters);
+    }
 }

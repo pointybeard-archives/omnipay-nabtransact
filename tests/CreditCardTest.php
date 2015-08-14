@@ -6,7 +6,7 @@ use Omnipay\NABTransact\Tests\Lib;
 use Omnipay\NABTransact\Common\CreditCard;
 use PHPUnit_Framework_TestCase;
 
-class PeriodicGatewayTest extends PHPUnit_Framework_TestCase
+class CreditCardTest extends PHPUnit_Framework_TestCase
 {
     use Lib\fakerTrait;
 

@@ -28,22 +28,37 @@ class PeriodicGatewayTest extends GatewayTestCase
         $request = $this->gateway->createCard(['card' => $card]);
 
         $this->assertInstanceOf('Omnipay\NABTransact\Message\PeriodicCreateCustomerRequest', $request);
-        return $card;
+        return ['customerReference' => '1234abcd', 'card' => $card];
     }
 
-    public function testUpdateCard()
+	/**
+	 * @depends testCreateCard
+	 */
+    public function testUpdateCard(array $details)
     {
         $expiry = explode('/', self::$faker->creditCardExpirationDateString);
-        $card = [
+        $details['card'] = [
             'number' => self::$faker->creditCardNumber,
             'expiryMonth' => $expiry[0],
             'expiryYear' => $expiry[1],
             'cvv' => self::$faker->randomNumber(3),
         ];
 
-        $request = $this->gateway->updateCard(['card' => $card]);
+        $request = $this->gateway->updateCard($details);
 
         $this->assertInstanceOf('Omnipay\NABTransact\Message\PeriodicUpdateCustomerRequest', $request);
-        return $card;
+		$this->assertEquals($request->getCustomerReference(), $details['customerReference']);
+        return $details;
+    }
+
+	/**
+	 * @depends testUpdateCard
+	 */
+    public function testDeleteCard(array $details)
+    {
+        $request = $this->gateway->deleteCard($details);
+
+        $this->assertInstanceOf('Omnipay\NABTransact\Message\PeriodicDeleteCustomerRequest', $request);
+        return $details;
     }
 }
