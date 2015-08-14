@@ -5,7 +5,7 @@
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements NAB Transact support for Omnipay.
 
-**IMPORTANT: This is a very early alpha release and is likely to be buggy. Please do not use this in production environments.**
+**IMPORTANT: This is a very early alpha release, so it's pretty rough, and is likely to be buggy. Please do not use this in production environments. If anyone wants to help me out, that would be awesome.**
 
 
 ## Installation
@@ -16,7 +16,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "pointybeard/omnipay-nabtransact": "~1.0"
+        "pointybeard/omnipay-nabtransact": "~0.1"
     }
 }
 ```
@@ -61,6 +61,16 @@ And run composer to update your dependencies:
     ]);
     $response = $request->send();
 
+    // Trigger a payment
+    $request = $g->purchase([
+        'customerReference' => $response->getCustomerReference(),
+        'transactionReference' => 'Test Trigger of CC Payment',
+        'transactionAmount' => '1234',
+        'transactionCurrency' => 'AUD',
+    ]);
+
+    $response = $request->send();
+
     // Delete a customer
     $request = $g->deleteCard(['customerReference' => $response->getCustomerReference()]);
     $response = $request->send();
@@ -72,7 +82,9 @@ repository.
 
 ## Out Of Scope
 
-Omnipay does not cover recurring payments, and so those features are not included in this package. Extensions to this gateway are always welcome.
+This currently supports the 'addcrn', 'editcrn', 'deletecrn' and 'trigger' actions of NAB's "Customer Management and Payment scheduling" XML API. Eventually it will support scheduling and triggering a DD payment.
+
+It does not support the "XML API for Payments" API, however will eventually.
 
 ## Support
 
