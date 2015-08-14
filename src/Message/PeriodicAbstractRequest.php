@@ -7,7 +7,7 @@ abstract class PeriodicAbstractRequest extends AbstractRequest
     protected $liveEndpoint = 'https://transact.nab.com.au/xmlapi/periodic';
     protected $testEndpoint = 'https://transact.nab.com.au/xmlapidemo/periodic';
 
-	abstract protected function buildRequestBody(array $data);
+    abstract protected function buildRequestBody(array $data);
 
     public function getCustomerReference()
     {
@@ -22,7 +22,7 @@ abstract class PeriodicAbstractRequest extends AbstractRequest
     protected function getBaseData()
     {
         $data = parent::getBaseData();
-		$data['CustomerReferenceNumber'] = $this->getCustomerReference();
+        $data['CustomerReferenceNumber'] = $this->getCustomerReference();
 
         //if (false == ($data['Customer']['CustomerReferenceNumber'] = $this->getCardReference())) {
         //    $this->validate('card');
@@ -32,7 +32,8 @@ abstract class PeriodicAbstractRequest extends AbstractRequest
             $data['Customer']['CardDetails'] = [
                 'ExpiryMonth' => $this->getCard()->getExpiryDate('m'),
                 'ExpiryYear' => $this->getCard()->getExpiryDate('y'),
-                'Number' => $this->getCard()->getNumber()
+                'Number' => $this->getCard()->getNumber(),
+                'Cvv' => $this->getCard()->getCvv(),
             ];
         }
 
@@ -50,8 +51,8 @@ abstract class PeriodicAbstractRequest extends AbstractRequest
 
         return $this->response = new PeriodicResponse($this, $httpResponse->getBody());
     }
-	
-	public function getEndpoint(){
-		return self::getEndpointBase();
-	}
+
+    public function getEndpoint(){
+        return self::getEndpointBase();
+    }
 }

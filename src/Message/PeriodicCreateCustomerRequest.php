@@ -63,6 +63,7 @@ final class PeriodicCreateCustomerRequest extends PeriodicAbstractRequest
                 <CreditCardInfo>
                     <cardNumber>'.$data['Customer']['CardDetails']['Number'].'</cardNumber>
                     <expiryDate>'.$data['Customer']['CardDetails']['ExpiryMonth'].'/'.$data['Customer']['CardDetails']['ExpiryYear'].'</expiryDate>
+					<cvv>'.$data['Customer']['CardDetails']['Cvv'].'</cvv>
                 </CreditCardInfo>
             </PeriodicItem>
         </PeriodicList>

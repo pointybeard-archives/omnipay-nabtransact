@@ -162,4 +162,9 @@ class PeriodicResponse extends AbstractResponse
     {
         return (string)$this->data->Periodic->PeriodicList->PeriodicItem->responseCode;
     }
+
+    public function getCustomerReference()
+    {
+        return (string)$this->data->Periodic->PeriodicList->PeriodicItem->crn;
+    }
 }
