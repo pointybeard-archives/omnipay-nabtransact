@@ -94,10 +94,10 @@ class PeriodicGateway extends AbstractGateway
      * @param array $parameters
      * @return \Omnipay\NABTransact\Message\PeriodicUpdateCustomerRequest
      */
-    //public function updateCard(array $parameters = [])
-    //{
-    //    return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicUpdateCustomerRequest', $parameters);
-    //}
+    public function updateCard(array $parameters = [])
+    {
+        return $this->createRequest('\Omnipay\NABTransact\Message\PeriodicUpdateCustomerRequest', $parameters);
+    }
 
     /**
      * Delete a credit card stored as a Customer Reference Number (CRN)

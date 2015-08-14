@@ -6,16 +6,16 @@ use Omnipay\Tests\TestCase;
 use Omnipay\NABTransact\Common\CreditCard;
 use Omnipay\NABTransact\Tests\Lib;
 
-class PeriodicCreateCustomerRequestTest extends TestCase
+class PeriodicUpdateCustomerRequestTest extends TestCase
 {
     use Lib\fakerTrait;
 	private static $request;
 	
 	public function setUp(){
-		self::$request = new PeriodicCreateCustomerRequest($this->getHttpClient(), $this->getHttpRequest());
+		self::$request = new PeriodicUpdateCustomerRequest($this->getHttpClient(), $this->getHttpRequest());
 	}
 
-    public function testCreateGetData()
+    public function testUpdateGetData()
     {
 		$expiry = explode('/', self::$faker->creditCardExpirationDateString);
 		$details = [
@@ -23,6 +23,7 @@ class PeriodicCreateCustomerRequestTest extends TestCase
             'password' => 'abcd1234',
 			'testMode' => true,
 			'apiVersion' => 'spxml-4.2',
+			'customerReference' => '7e02b8b04a356b12f708',
 			'card' => new CreditCard([
                 'number' => self::$faker->creditCardNumber,
                 'expiryMonth' => $expiry[0],
@@ -32,7 +33,7 @@ class PeriodicCreateCustomerRequestTest extends TestCase
 		];
 
         self::$request->initialize($details);
-
+		
         $data = self::$request->getData();
 
         $this->assertSame($details['card']->getNumber(), $data['Customer']['CardDetails']['Number']);
@@ -41,18 +42,19 @@ class PeriodicCreateCustomerRequestTest extends TestCase
 			(int) $details['card']->getExpiryYear(),
 			(int) gmdate('Y', gmmktime(0, 0, 0, 1, 1, (int)$data['Customer']['CardDetails']['ExpiryYear']))
 		);
+		$this->assertSame($details['customerReference'], $data['CustomerReferenceNumber']);
 
 		return $details;
     }
 
 	/**
-	 * @depends testCreateGetData
+	 * @depends testUpdateGetData
 	 */
-    public function testCreateCustomerSendSuccess(array $details)
+    public function testUpdateCustomerSendSuccess(array $details)
     {
 		self::$request->initialize($details);
 
-        $this->setMockHttpResponse('PeriodicCreateCustomerRequestSuccess.txt');
+        $this->setMockHttpResponse('PeriodicUpdateCustomerRequestSuccess.txt');
         $response = self::$request->send();
 
         $this->assertTrue($response->isSuccessful());
@@ -61,19 +63,19 @@ class PeriodicCreateCustomerRequestTest extends TestCase
 		return $details;
     }
 	/**
-	 * @depends testCreateGetData
+	 * @depends testUpdateGetData
 	 */
-    public function testCreateCustomerSendFailure(array $details)
+    public function testUpdateCustomerSendFailure(array $details)
     {
 		self::$request->initialize($details);
 
-        $this->setMockHttpResponse('PeriodicCreateCustomerRequestFailure.txt');
+        $this->setMockHttpResponse('PeriodicUpdateCustomerRequestFailure.txt');
         $response = self::$request->send();
     
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
-        $this->assertSame('346', $response->getCode());
-        $this->assertSame('Duplicate CRN Found', $response->getMessage());
+        $this->assertSame('303', $response->getCode());
+        $this->assertSame('Invalid CRN', $response->getMessage());
 		return $details;
     }
 
