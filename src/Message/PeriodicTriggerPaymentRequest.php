@@ -6,7 +6,7 @@
 namespace Omnipay\NABTransact\Message;
 
 /**
- * 
+ *
  */
 final class PeriodicTriggerPaymentRequest extends PeriodicAbstractRequest
 {
@@ -106,33 +106,13 @@ final class PeriodicTriggerPaymentRequest extends PeriodicAbstractRequest
         return $this->getParameter('transactionReference');
     }
 
-    public function setTransactionAmount($value)
-    {
-        return $this->setParameter('transactionAmount', $value);
-    }
-
-    public function getTransactionAmount()
-    {
-        return $this->getParameter('transactionAmount');
-    }
-
-    public function setTransactionCurrency($value)
-    {
-        return $this->setParameter('transactionCurrency', $value);
-    }
-
-    public function getTransactionCurrency()
-    {
-        return $this->getParameter('transactionCurrency');
-    }
-
     public function getData()
     {
         $data = $this->getBaseData();
         $this->validate(['customerReference', 'transactionReference', 'transactionAmount', 'transactionCurrency']);
         $data['Transaction'] = [
-            'Amount' => $this->getTransactionAmount(),
-            'Currency' => $this->getTransactionCurrency(),
+            'Amount' => $this->getAmountInteger(),
+            'Currency' => $this->getCurrency(),
             'Reference' => $this->getTransactionReference(),
         ];
 
