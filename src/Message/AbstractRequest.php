@@ -46,10 +46,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('messageTimestamp', $value);
     }
 
+    public function getMessageId()
+    {
+        return $this->getParameter('messageId');
+    }
+
+    public function setMessageId($value)
+    {
+        return $this->setParameter('messageId', $value);
+    }
+
     protected function getBaseData()
     {
+
+        $this->setMessageId(self::generateMessageId());
         $data = [
-            'MessageID' => self::generateMessageId(),
+            'MessageID' => $this->getMessageId(),
             'MessageTimestamp' => null,
             'ActionType' => $this->getActionType(),
             'ApiVersion' => $this->getApiVersion(),

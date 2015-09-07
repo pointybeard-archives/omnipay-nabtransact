@@ -91,11 +91,6 @@ final class PeriodicTriggerPaymentRequest extends PeriodicAbstractRequest
         '99' => 'Reserved for National Use',
     ];
 
-    public function getCustomerReference()
-    {
-        return $this->getParameter('customerReference');
-    }
-
     public function setTransactionReference($value)
     {
         return $this->setParameter('transactionReference', $value);
@@ -139,8 +134,10 @@ final class PeriodicTriggerPaymentRequest extends PeriodicAbstractRequest
         return $data;
     }
 
-    public function validate(array $parameterNames)
+    public function validate()
     {
+		$parameterNames = func_get_args()[0];
+
         foreach ($parameterNames as $parameter) {
             parent::validate($parameter);
         }

@@ -90,4 +90,14 @@ class PeriodicResponse extends AbstractResponse
     {
         return (string) $this->data->Periodic->PeriodicList->PeriodicItem->txnID;
     }
+
+    public function getTransactionReference()
+    {
+        return (string) $this->data->Periodic->PeriodicList->PeriodicItem->transactionReference;
+    }
+
+    public function getTransactionCurrency(){
+        return (string) $this->data->Periodic->PeriodicList->PeriodicItem->currency;
+    }
+
 }
