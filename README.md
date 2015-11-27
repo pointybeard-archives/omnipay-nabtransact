@@ -65,8 +65,8 @@ And run composer to update your dependencies:
     $request = $g->purchase([
         'customerReference' => $response->getCustomerReference(),
         'transactionReference' => 'Test Trigger of CC Payment',
-        'transactionAmount' => '1234',
-        'transactionCurrency' => 'AUD',
+        'amount' => '1234',
+        'currency' => 'AUD',
     ]);
 
     $response = $request->send();
