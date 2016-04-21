@@ -1,5 +1,7 @@
 # Omnipay: NAB Transact
 
+[![Latest Stable Version](https://poser.pugx.org/pointybeard/omnipay-nabtransact/v/stable)](https://packagist.org/packages/pointybeard/omnipay-nabtransact) [![Total Downloads](https://poser.pugx.org/pointybeard/omnipay-nabtransact/downloads)](https://packagist.org/packages/pointybeard/omnipay-nabtransact) [![Latest Unstable Version](https://poser.pugx.org/pointybeard/omnipay-nabtransact/v/unstable)](https://packagist.org/packages/pointybeard/omnipay-nabtransact) [![License](https://poser.pugx.org/pointybeard/omnipay-nabtransact/license)](https://packagist.org/packages/pointybeard/omnipay-nabtransact)
+
 **NAB Transact API driver for the Omnipay PHP payment processing library**
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
