@@ -104,7 +104,7 @@ final class PeriodicTriggerPaymentRequest extends PeriodicAbstractRequest
     public function getData()
     {
         $data = $this->getBaseData();
-        $this->validate(['customerReference', 'transactionReference', 'transactionAmount', 'transactionCurrency']);
+        $this->validate(['customerReference', 'transactionReference', 'amount', 'currency']);
         $data['Transaction'] = [
             'Amount' => $this->getAmountInteger(),
             'Currency' => $this->getCurrency(),
